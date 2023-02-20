@@ -33,7 +33,7 @@ st.title("Music Recomender")
 from yellowbrick.target import FeatureCorrelation
 
 feature_names = ['acousticness', 'danceability', 'energy', 'instrumentalness',
-    'liveness', 'loudness', 'speechiness', 'tempo', 'valence','duration_ms','explicit','key','mode','year']
+    'liveness', 'loudness', 'speechiness', 'tempo', 'valence','duration_ms','explicit','key','mode']
 
 X, y = data[feature_names], data['popularity']
 
