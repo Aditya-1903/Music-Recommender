@@ -11,7 +11,6 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 from sklearn.metrics import euclidean_distances
 from scipy.spatial.distance import cdist
@@ -64,46 +63,6 @@ for i in counts:
     yData.append(counts[i])
 lineG = pd.DataFrame(yData, xData)
 
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-
-cluster_pipeline = Pipeline([('scaler', StandardScaler()), ('kmeans', KMeans(n_clusters=10))])
-X = genre_data.select_dtypes(np.number)
-cluster_pipeline.fit(X)
-genre_data['cluster'] = cluster_pipeline.predict(X)
-
-# Visualizing the Clusters with t-SNE
-
-from sklearn.manifold import TSNE
-
-tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=1))])
-genre_embedding = tsne_pipeline.fit_transform(X)
-projection = pd.DataFrame(columns=['x', 'y'], data=genre_embedding)
-projection['genres'] = genre_data['genres']
-projection['cluster'] = genre_data['cluster']
-
-song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
-                                ('kmeans', KMeans(n_clusters=20, 
-                                verbose=False))
-                                ], verbose=False)
-
-X = data.select_dtypes(np.number)
-number_cols = list(X.columns)
-song_cluster_pipeline.fit(X)
-song_cluster_labels = song_cluster_pipeline.predict(X)
-data['cluster_label'] = song_cluster_labels
-
-# Visualizing the Clusters with PCA
-
-from sklearn.decomposition import PCA
-
-pca_pipeline = Pipeline([('scaler', StandardScaler()), ('PCA', PCA(n_components=2))])
-song_embedding = pca_pipeline.fit_transform(X)
-projection = pd.DataFrame(columns=['x', 'y'], data=song_embedding)
-projection['title'] = data['name']
-projection['cluster'] = data['cluster_label']
-
 def edaPage():
     st.subheader("Feature Correlation")
     st.image("feature correlation.jpg")
@@ -134,15 +93,6 @@ def edaPage():
     cluster_pipeline.fit(X)
     genre_data['cluster'] = cluster_pipeline.predict(X)
 
-    # Visualizing the Clusters with t-SNE
-
-    from sklearn.manifold import TSNE
-
-    tsne_pipeline = Pipeline([('scaler', StandardScaler()), ('tsne', TSNE(n_components=2, verbose=1))])
-    genre_embedding = tsne_pipeline.fit_transform(X)
-    projection = pd.DataFrame(columns=['x', 'y'], data=genre_embedding)
-    projection['genres'] = genre_data['genres']
-    projection['cluster'] = genre_data['cluster']
 
     song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
                                     ('kmeans', KMeans(n_clusters=20, 
