@@ -35,16 +35,6 @@ from yellowbrick.target import FeatureCorrelation
 feature_names = ['acousticness', 'danceability', 'energy', 'instrumentalness',
     'liveness', 'loudness', 'speechiness', 'tempo', 'valence','duration_ms','explicit','key','mode']
 
-X, y = data[feature_names], data['popularity']
-
-# Create a list of the feature names
-features = np.array(feature_names)
-
-# Instantiate the visualizer
-visualizer = FeatureCorrelation(labels=features)
-
-plt.rcParams['figure.figsize']=(20,20)
-visualizer.fit(X, y)
 
 from collections import defaultdict
 counts = defaultdict(int)
@@ -64,9 +54,6 @@ for i in counts:
 lineG = pd.DataFrame(yData, xData)
 
 def edaPage():
-    st.subheader("Feature Correlation")
-    st.image("feature correlation.jpg")
-
     st.subheader("Heatmap")
     fig, ax = plt.subplots()
     sns.heatmap(data.corr(), annot=True, fmt='.2f')
