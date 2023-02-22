@@ -69,16 +69,7 @@ def edaPage():
     fig = px.bar(top10_genres, x='genres', y=sound_features, height=750)
     st.plotly_chart(fig)
 
-    from sklearn.cluster import KMeans
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.pipeline import Pipeline
-
-    cluster_pipeline = Pipeline([('scaler', StandardScaler()), ('kmeans', KMeans(n_clusters=10))])
-    X = genre_data.select_dtypes(np.number)
-    cluster_pipeline.fit(X)
-    genre_data['cluster'] = cluster_pipeline.predict(X)
-
-
+    
     song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
                                     ('kmeans', KMeans(n_clusters=20, 
                                     verbose=False))
