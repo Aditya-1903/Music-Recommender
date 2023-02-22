@@ -91,10 +91,6 @@ def edaPage():
     projection['title'] = data['name']
     projection['cluster'] = data['cluster_label']
 
-    st.subheader("scatter plot")
-    projection['genres'] = genre_data['genres']
-    fig = px.scatter(projection, x='x', y='y', color='cluster', hover_data=['x', 'y', 'genres'])
-    st.write(fig)
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
