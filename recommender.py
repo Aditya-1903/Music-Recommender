@@ -30,8 +30,6 @@ data['name']= data['name'].apply(tlower)
 
 st.title("Music Recomender")
 
-from yellowbrick.target import FeatureCorrelation
-
 feature_names = ['acousticness', 'danceability', 'energy', 'instrumentalness',
     'liveness', 'loudness', 'speechiness', 'tempo', 'valence','duration_ms','explicit','key','mode']
 
