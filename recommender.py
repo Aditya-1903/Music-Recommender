@@ -71,7 +71,7 @@ def edaPage():
 
     
     song_cluster_pipeline = Pipeline([('scaler', StandardScaler()), 
-                                    ('kmeans', KMeans(n_clusters=20, 
+                                    ('kmeans', KMeans(n_clusters=10, 
                                     verbose=False))
                                     ], verbose=False)
 
